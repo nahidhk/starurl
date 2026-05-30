@@ -1,0 +1,36 @@
+.nav {
+    height: 80px;
+    width: 100%;
+    background-color: #4680ff;
+    position: sticky;
+    top: 0;
+    left: 0;
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-button button {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-button button:hover {
+    border-radius: 10px;
+    background-color: #fff;
+    color: #4680ff;
+    box-shadow: none;
+}
+.logo {
+    height: 25px;
+    width: auto;
+}

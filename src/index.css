@@ -7,7 +7,39 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.flex{
+  display: flex;
+}
+.around{
+  justify-content: space-around;
+}
+.center{
+  justify-content: center;
+}
+.medel{
+  align-items: center;
+}
+.beet{
+  justify-content: space-between;
+}
+.test{
+  background-color: red;
+}
+.ultraBox{
+  height: auto;
+  width: auto;
+  padding: 40px;
+  background-color: #f0f0f0;
+  margin: 20px auto;
+  background-image: linear-gradient( #ffd5ec71 , #c1fbfe88);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+@media (max-width: 600px) {
+  .ultraBox {
+    padding: 20px;
+    margin: 10px auto;
+    width: 85%;
+  }
 }
