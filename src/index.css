@@ -1,39 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.flex{
+.flex {
   display: flex;
 }
-.around{
+
+.around {
   justify-content: space-around;
 }
-.center{
+
+.center {
   justify-content: center;
 }
-.medel{
+
+.medel {
   align-items: center;
 }
-.beet{
+
+.beet {
   justify-content: space-between;
 }
-.test{
+
+.test {
   background-color: red;
 }
-.ultraBox{
+
+.ultraBox {
   height: auto;
   width: auto;
   padding: 40px;
   background-color: #f0f0f0;
   margin: 20px auto;
-  background-image: linear-gradient( #ffd5ec71 , #c1fbfe88);
+  background-image: linear-gradient(#ffd5ec71, #c1fbfe88);
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.mark {
+  color: #ff0066;
+}
+
+.inputBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  border: 1px solid #4680ff;
+  border-radius: 50px;
+}
+
+.inputBox input {
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  border-radius: 50px;
+  background-color: transparent;
+}
+
+.inputBox button {
+  width: 200px;
+  color: #fff;
+  background-color: #4680ff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popupBack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+/* .popup{
+  height: auto;
+  padding: 10px;
+  background-color: #ffff;
+  width: 400px;
+  border-radius: 10px;
+} */
+.animation {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.closeBtn {
+  height: auto;
+  width: auto;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 5px 10px;
+  font-size: 18pt;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.closeBtn:hover {
+  color: #fff;
+  background-color: #ff0066;
+  border-radius: 5px;
+}
+
+h2 {
+  margin: 0;
+}
+
+.fxinput {
+  display: flex;
+  height: 40px;
+  border: #4680ff solid 1px;
+  border-radius: 10px;
+  margin: 10px;
+}
+.fxinput input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background-color: transparent;
+}
+.fxinput button {
+  width: 100px;
+  color: #000000;
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: none;
+  border-bottom: none;
+  border-left: #4680ff solid 1px;
+  transition: all 0.3s;
+  border-right: none;
+}
+.fxinput button.end {
+  border-radius: 0 10px 10px 0;
+}
+.columan {
+  flex-direction: column;
+}
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+  margin: 10px;
 }
 
 @media (max-width: 600px) {

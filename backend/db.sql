@@ -1,0 +1,17 @@
+CREATE TABLE short_urls (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    long_url TEXT NOT NULL,
+    short_id VARCHAR(15) NOT NULL UNIQUE,
+
+    clicks INT DEFAULT 0,
+
+    ip_address VARCHAR(45) DEFAULT NULL,
+    user_agent TEXT DEFAULT NULL,
+
+    is_active TINYINT(1) DEFAULT 1,
+
+    expires_at DATETIME DEFAULT NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+);

@@ -11,6 +11,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
+      <p style={{ textAlign: "center" }}>
+        Released by <a href="https://www.ndsql.top" target="_blank" rel="noopener noreferrer">NdSQL</a>
+      </p>
     </>
   );
 }
