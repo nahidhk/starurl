@@ -18,3 +18,5 @@ export async function apiData(data) {
 
     return await response.json();
 }
+
+

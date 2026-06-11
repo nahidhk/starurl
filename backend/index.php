@@ -51,7 +51,7 @@ $table = "starurl_ndsql";
 // =====================
 // GET ALL DATA
 // =====================
-if ($type === "get") {
+if ($type === "getall") {
 
     try {
 
@@ -130,38 +130,91 @@ if ($type === "post") {
 // =====================
 // Get Request
 // =====================
-
 if ($type === "get") {
 
-    $shortid = $input['shortid'] ?? $_GET['shortid'] ?? '';
+ $data = $input['data'] ?? $_POST['data'] ?? [];
 
-    if (empty($shortid)) {
+    if (empty($data)) {
         echo json_encode([
             "status" => "error",
-            "message" => "No shortid provided"
+            "message" => "No data provided"
+        ]);
+        exit();
+    }
+    $shortid = $data['short_id'] ?? '';
+
+    $stmt = $pdo->prepare("
+        SELECT *
+        FROM `$table`
+        WHERE short_id = :shortid
+        LIMIT 1
+    ");
+
+    $stmt->execute([
+        ':shortid' => $shortid
+    ]);
+
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$data) {
+        echo json_encode([
+            "status" => "error",
+            "message" => "Short ID not found"
+        ]);
+        exit;
+    }
+
+    echo json_encode([
+        "status" => "success",
+        "data" => $data
+    ]);
+
+    exit;
+}
+
+if($type === "edit") {
+
+    $data = $input['data'] ?? $_POST['data'] ?? [];
+
+    if (empty($data)) {
+        echo json_encode([
+            "status" => "error",
+            "message" => "No data provided"
+        ]);
+        exit();
+    }
+
+    $id = $data['id'] ?? '';
+
+    if (empty($id)) {
+        echo json_encode([
+            "status" => "error",
+            "message" => "ID is required for edit"
         ]);
         exit();
     }
 
     try {
 
-        $stmt = $pdo->prepare("SELECT * FROM `$table` WHERE `shortid` = :shortid");
-        $stmt->bindValue(":shortid", $shortid);
-        $stmt->execute();
+        $columns = array_keys($data);
+        unset($columns[array_search('id', $columns)]);
 
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $sql = "UPDATE `$table` SET "
+            . implode(" = ?, ", $columns) . " = ? "
+            . "WHERE id = ?";
 
-        if ($data) {
-            echo json_encode([
-                "status" => "success",
-                "data" => $data
-            ]);
-        } else {
-            echo json_encode([
-                "status" => "error",
-                "message" => "Short ID not found"
-            ]);
-        }
+        $stmt = $pdo->prepare($sql);
+
+        $values = array_values($data);
+        unset($values[array_search($id, $values)]);
+        $values[] = $id;
+
+        $stmt->execute($values);
+
+        echo json_encode([
+            "status" => "success",
+            "message" => "Data updated successfully"
+        ]);
 
     } catch (PDOException $e) {
 
