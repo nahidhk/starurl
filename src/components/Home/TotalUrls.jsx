@@ -14,7 +14,6 @@ export default function TotalUrls() {
             type: "getall",
         })
             .then((res) => {
-                // 🔥 clicks অনুযায়ী sort (high → low)
                 const sortedData = res.data.sort((a, b) => b.clicks - a.clicks);
                 setSQLData(sortedData);
             })
@@ -22,6 +21,11 @@ export default function TotalUrls() {
                 console.error(err);
             });
     }, []);
+
+    const sessoinData = (shortId) => {
+        sessionStorage.setItem("shortId", shortId);
+        navigate("/setting");
+    }
 
     return (
         <div className="flex center">
@@ -44,7 +48,7 @@ export default function TotalUrls() {
                                 <div title="Open this url" onClick={() => window.location.href=siteDomin + item.short_id}>
                                     <MdOutlineOpenInNew style={{ fontSize: 18, cursor: "pointer" }} />
                                 </div>
-                                <div onClick={() => navigate("setting")} title="Setting">
+                                <div onClick={() => sessoinData(item.short_id)} title="Setting">
                                     <CiSettings style={{ fontSize: 23, cursor: "pointer" }} />
                                 </div>
                             </div>
