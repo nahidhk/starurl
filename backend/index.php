@@ -172,62 +172,82 @@ if ($type === "get") {
     exit;
 }
 
-if($type === "edit") {
+
+if ($type === "edit") {
 
     $data = $input['data'] ?? $_POST['data'] ?? [];
 
     if (empty($data)) {
-        echo json_encode([
-            "status" => "error",
-            "message" => "No data provided"
-        ]);
+        echo json_encode(["status"=>"error","message"=>"No data"]);
         exit();
     }
 
-    $id = $data['id'] ?? '';
+    $id = $data['id'] ?? null;
 
-    if (empty($id)) {
-        echo json_encode([
-            "status" => "error",
-            "message" => "ID is required for edit"
-        ]);
+    if (!$id) {
+        echo json_encode(["status"=>"error","message"=>"ID required"]);
         exit();
     }
 
     try {
 
-        $columns = array_keys($data);
-        unset($columns[array_search('id', $columns)]);
+        // 🔥 STEP 1: পুরানো save_data আনো
+        $stmt = $pdo->prepare("SELECT save_data FROM `$table` WHERE id = ?");
+        $stmt->execute([$id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $sql = "UPDATE `$table` SET "
-            . implode(" = ?, ", $columns) . " = ? "
-            . "WHERE id = ?";
+        $existing = [];
+
+        if (!empty($row['save_data'])) {
+            $decoded = json_decode($row['save_data'], true);
+            if (is_array($decoded)) {
+                $existing = $decoded;
+            }
+        }
+
+        // 🔥 STEP 2: নতুন entry
+        $newEntry = [
+            "ip_address" => $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['REMOTE_ADDR'] ?? '',
+            "user_agent" => $_SERVER['HTTP_USER_AGENT'] ?? '',
+            "timestamp" => date('c'),
+            "clicks" => $data['clicks'] ?? null
+        ];
+
+        // 🔥 STEP 3: append
+        $existing[] = $newEntry;
+
+        $data['save_data'] = json_encode($existing);
+
+        unset($data['id']);
+
+        // 🔥 STEP 4: dynamic update
+        $columns = array_keys($data);
+
+        $setClause = implode(' = ?, ', $columns) . ' = ?';
+
+        $sql = "UPDATE `$table` SET $setClause WHERE id = ?";
 
         $stmt = $pdo->prepare($sql);
 
         $values = array_values($data);
-        unset($values[array_search($id, $values)]);
         $values[] = $id;
 
         $stmt->execute($values);
 
         echo json_encode([
-            "status" => "success",
-            "message" => "Data updated successfully"
+            "status"=>"success",
+            "message"=>"Updated"
         ]);
 
     } catch (PDOException $e) {
-
         echo json_encode([
-            "status" => "error",
-            "message" => $e->getMessage()
+            "status"=>"error",
+            "message"=>$e->getMessage()
         ]);
-
     }
 
     exit();
 }
-
 
 // =====================
 // Invalid Request

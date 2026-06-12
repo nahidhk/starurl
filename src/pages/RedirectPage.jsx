@@ -24,22 +24,19 @@ export default function RedirectPage() {
     if (!sqlData?.long_url) {
         return <p style={{ textAlign: "center" }}>Working...</p>;
     } else {
-        const countClick = sqlData.clicks + 1;
-        const userAgent = navigator.userAgent;
-        const ip_adress = "NO"
+        const countClick = Number(sqlData.clicks) + 1;
+
         apiData({
             type: "edit",
             data: {
-                id: "",
-                clicks: countClick,
-                user_agent: userAgent,
-                ip_address: ip_adress
+                id: sqlData.id,
+                clicks: countClick
             }
-        }
-        ).then(res => {
-            console.log(res.data);
+        }).then(res => {
+            if (res.status === "success") {
+                window.location.href = sqlData.long_url;
+            }
         });
-        // window.location.href = sqlData.long_url;
     }
 
 

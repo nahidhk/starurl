@@ -13,7 +13,6 @@ export default function UrlSystem() {
     const [appPass, setAppPass] = useState("");
 
     const handelCheckURL = () => {
-
         if (longUrl.trim() === "") {
             alert("Please enter a URL");
             return;
@@ -44,7 +43,7 @@ export default function UrlSystem() {
                 .then((response) => {
 
                     if (response.status === "success") {
-
+                        setLongUrl("");
                         setShortUrl(
                             `${siteDomin}${shortid}`
                         );

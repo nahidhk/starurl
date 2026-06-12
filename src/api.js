@@ -15,7 +15,6 @@ export async function apiData(data) {
     if (!response.ok) {
         throw new Error("Server Error : " + response.status);
     }
-
     return await response.json();
 }
 

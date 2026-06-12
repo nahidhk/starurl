@@ -35,7 +35,7 @@ body {
 
 .ultraBox {
   height: auto;
-  width: auto;
+  width: 570px;
   padding: 40px;
   background-color: #f0f0f0;
   margin: 20px auto;
@@ -91,8 +91,9 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
 
 }
-.bgFFF{
-  background-color:#fff;
+
+.bgFFF {
+  background-color: #fff;
 }
 
 /* .popup{
@@ -150,6 +151,7 @@ h2 {
   border-radius: 10px;
   margin: 10px;
 }
+
 .fxinput input {
   width: 100%;
   padding: 10px;
@@ -158,6 +160,7 @@ h2 {
   font-size: 16px;
   background-color: transparent;
 }
+
 .fxinput button {
   width: 100px;
   color: #000000;
@@ -173,23 +176,76 @@ h2 {
   transition: all 0.3s;
   border-right: none;
 }
+
 .fxinput button.end {
   border-radius: 0 10px 10px 0;
 }
+
 .columan {
   flex-direction: column;
 }
+
 label {
   font-size: 14px;
   margin-bottom: 5px;
   color: #333;
   margin: 10px;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes dotFlash {
-  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-  40% { opacity: 1; transform: scale(1); }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
+
+@keyframes dotFlash {
+
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cpt {
+  height: 500px;
+}
+
+.id {
+  height: 57px;
+  border: 1px solid #4680ff;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.id div {
+  height: 100%;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right:10px ;
+}
+.uniton div{
+  border-left: 1px solid #4680ff;
+}
+.id .fast {
+  border-right: 1px solid #4680ff;
+}
+
+.scroll {
+  overflow-y: auto;
+}
+
+
+
 @media (max-width: 600px) {
   .ultraBox {
     padding: 20px;
